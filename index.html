@@ -1,16 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>replit</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Centered Full Screen Image</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-color: black;
+      touch-action: none;
+    }
+
+    img {
+      object-fit: contain;
+    }
+
+    input {
+      position: absolute;
+      top: 94vh;
+      left: 1vw;
+      background: rgb(100, 100, 100);
+      padding: 0.5vw;
+      font-size: 1.2vw;
+      border-radius: 0.5vw;
+    }
+
+  </style>
 </head>
 
 <body>
-  Hello world
-  <script src="script.js"></script>
+  <input type="file" accept="image/*" id="fileInput">
+  <img id="displayImage" src="">
+
+  <script>
+    document.getElementById('fileInput').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('displayImage').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
 </body>
 
 </html>
